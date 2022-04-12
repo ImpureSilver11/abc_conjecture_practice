@@ -13,11 +13,15 @@ def abc_conjecture
       # 互いに異なる素因数の積
       d = (prime_factor_decomposition(a) + prime_factor_decomposition(b) + prime_factor_decomposition(c)).uniq
       if c > d.inject(:*)
-        result.push([a, b, c, d])
+        result.push({a: a, b: b, c: c, d: d, epsilon: epsilon(c, d.inject(:*)) })
       end
     end
   end
   result
+end
+
+def epsilon(c, d)
+  Math.log(c, d) - 1.0.to_f
 end
 
 # 素因数分解を行う
